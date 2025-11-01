@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZHY云电脑-企业级云计算服务</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:"Microsoft YaHei",Arial,sans-serif;}
+        .container{width:90%;max-width:1200px;margin:0 auto;}
+        .btn{padding:8px 16px;background:#2388ff;color:#fff;border-radius:4px;cursor:pointer;}
+        .text-primary{color:#2388ff;}
+
+        /* 导航栏 */
+        header{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.1);position:sticky;top:0;z-index:999;}
+        .nav-wrap{display:flex;justify-content:space-between;align-items:center;padding:15px 0;}
+        .logo{font-size:20px;font-weight:bold;}
+        .nav-list{display:flex;gap:20px;}
+        .nav-list li a{color:#333;text-decoration:none;}
+        .nav-list li a:hover{color:#2388ff;}
+
+        /* 登录注册弹窗 */
+        .auth-dialog{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;}
+        .dialog-content{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:400px;background:#fff;border-radius:8px;padding:20px;}
+        .dialog-close{float:right;cursor:pointer;}
+        .dialog-form{margin-top:20px;}
+        .form-group{margin-bottom:15px;}
+        .form-group input{width:100%;padding:10px;border:1px solid #ddd;border-radius:4px;}
+        .form-switch{text-align:center;margin:10px 0;}
+
+        /* 内容页面 */
+        .page{display:none;min-height:500px;padding:40px 0;}
+        .section-title{text-align:center;margin-bottom:30px;}
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container nav-wrap">
+            <div class="logo">ZHY云电脑官网</div>
+            <ul class="nav-list">
+                <li><a href="javascript:loadPage('home')">首页</a></li>
+                <li><a href="javascript:loadPage('product')">产品</a></li>
+                <li><a href="javascript:loadPage('solution')">解决方案</a></li>
+                <li><a href="javascript:loadPage('price')">价格</a></li>
+                <li><a href="javascript:loadPage('support')">支持</a></li>
+                <li><a href="javascript:showLogin()">登录/注册</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- 登录弹窗 -->
+    <div class="auth-dialog" id="loginDialog">
+        <div class="dialog-content">
+            <div class="dialog-close" onclick="closeDialog()">×</div>
+            <h3>账号登录</h3>
+            <div class="dialog-form">
+                <div class="form-group"><input type="text" placeholder="请输入账号"></div>
+                <div class="form-group"><input type="password" placeholder="请输入密码"></div>
+                <button class="btn" onclick="doLogin()">登录</button>
+                <div class="form-switch"><a href="javascript:showRegister()">立即注册</a></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 注册弹窗 -->
+    <div class="auth-dialog" id="registerDialog">
+        <div class="dialog-content">
+            <div class="dialog-close" onclick="closeDialog()">×</div>
+            <h3>账号注册</h3>
+            <div class="dialog-form">
+                <div class="form-group"><input type="text" placeholder="请设置用户名"></div>
+                <div class="form-group"><input type="password" placeholder="请设置密码"></div>
+                <button class="btn" onclick="doRegister()">注册</button>
+                <div class="form-switch"><a href="javascript:showLogin()">返回登录</a></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 内容页面容器 -->
+    <div class="container">
+        <div id="pageHome" class="page">
+            <div class="section-title"><h2>ZHY云电脑-企业级云计算服务</h2></div>
+            <p>提供弹性计算、云存储、数据库等全栈云服务，助力企业数字化转型。</p>
+        </div>
+        <div id="pageProduct" class="page">
+            <div class="section-title"><h2>产品服务</h2></div>
+            <p>云服务器、对象存储、云数据库等全品类云产品，满足企业各类需求。</p>
+        </div>
+        <div id="pageSolution" class="page">
+            <div class="section-title"><h2>解决方案</h2></div>
+            <p>为电商、游戏、政务等行业提供定制化云计算解决方案。</p>
+        </div>
+        <div id="pagePrice" class="page">
+            <div class="section-title"><h2>价格体系</h2></div>
+            <p>按需付费，弹性计费，降低企业IT成本。</p>
+        </div>
+        <div id="pageSupport" class="page">
+            <div class="section-title"><h2>技术支持</h2></div>
+            <p>7×24小时专业技术支持，保障业务稳定运行。</p>
+        </div>
+    </div>
+
+    <script>
+        // 页面跳转
+        function loadPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.style.display = 'none');
+            document.getElementById('page' + pageId.charAt(0).toUpperCase() + pageId.slice(1)).style.display = 'block';
+        }
+
+        // 登录注册弹窗控制
+        function showLogin() {document.getElementById('loginDialog').style.display = 'block';}
+        function showRegister() {document.getElementById('registerDialog').style.display = 'block';}
+        function closeDialog() {document.querySelectorAll('.auth-dialog').forEach(dialog => dialog.style.display = 'none');}
+
+        // 登录注册逻辑
+        function doLogin() {alert('登录成功');closeDialog();loadPage('home');}
+        function doRegister() {alert('注册成功，请登录');closeDialog();showLogin();}
+    </script>
+</body>
+</html>
